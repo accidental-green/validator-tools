@@ -1,7 +1,19 @@
 import tkinter as tk
 from tkinter import font
 from subprocess import Popen
+import subprocess
 import os
+
+# Change to the home folder
+os.chdir(os.path.expanduser("~"))
+
+# Check sudo privileges
+try:
+    subprocess.run(['sudo', '-v'], check=True)
+    print("Sudo credentials authenticated.")
+except subprocess.CalledProcessError:
+    print("Failed to verify sudo credentials.")
+    exit(1)
 
 # Define the groups of clients
 ec_group = ("geth", "besu", "nethermind")
